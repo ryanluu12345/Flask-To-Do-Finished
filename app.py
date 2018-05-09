@@ -1,4 +1,4 @@
-from flask import Flask, render_template,redirect, url_for,request
+from flask import Flask, render_template,redirect, url_for, request
 import json
 
 '''Key Learning Goals
@@ -41,7 +41,7 @@ def signup():
 @app.route("/entry")
 def entry():
     #TODO:(2) Return the correct template
-    return
+    return render_template("entry.html")
 
 #TODO:(4) Render the correct template for the "home" page with tasks=tasks and name=name
 #TODO:(12) Add permissions for post requests
@@ -59,7 +59,7 @@ def home():
     #TODO:(15) Check if the username and password match
     #TODO:(16) If there is a match, re-render the "home" page with the tasks and the username
 
-    return
+    return render_template("home.html")
 
 #TODO:(17) Check post request
 #TODO:(18) Create an empty list for tasks
@@ -68,7 +68,7 @@ def home():
 #TODO:(21) Write all of the tasks to the "tasks.json" file
 @app.route("/confirm-entry",methods=["POST","GET"])
 def confirm_entry():
-    return "Your tasks have been saved <br> <a href='home'><button>View Tasks</button></a>"
+    return render_template("confirm-entry.html")
 
 #TODO:(1) Make a new route whose name is "confirm-signup"
 #TODO:(3) Make the new route render the "confirm-signup" page

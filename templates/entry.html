@@ -3,32 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Entry Form</title>
+    <link rel="stylesheet" href="./static/entry.css">
 </head>
 <body>
 
-<center><h1> Enter your top 3 tasks </h1></center>
 
-    <center>
-    <div>
+    <div class="div-entries">
 
- <form action="/confirm-entry" method="post">
+      <h1> Enter your tasks for today </h1>
 
-    <label>Priority 1</label> <br>
-    <input name="task1"><br>
+<form method="post" action="/confirm-entry">
 
-     <label>Priority 2</label> <br>
-    <input name="task2"><br>
+  <div class="tasks">
+    <input name="task"><br>
 
-     <label>Priority 3</label> <br>
-    <input name="task3"><br>
+    <input name="task"><br>
 
+    <input name="task"><br>
 
-    <button> Submit Tasks</button>
+  </div>
+    <button type="button" onclick="addInput()"> + Task</button><br>
+    <button type="submit"> Submit Tasks</button>
 
 </form>
 
     </div>
-    </center>
+
+<script>
+
+    function addInput(){
+
+  //Locates the divider with the tasks
+var taskDiv=document.getElementsByClassName("tasks")[0];
+
+  //Creates the new input
+  var task=document.createElement("INPUT");
+  task.setAttribute("name","task");
+
+  //Adds the new input and line break to the list
+  taskDiv.appendChild(task);
+  taskDiv.appendChild(document.createElement("BR"));
+
+
+}
+
+</script>
+
 
 </body>
 </html>

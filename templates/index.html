@@ -2,20 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Welcome</title>
+    <link href="./static/index.css" rel="stylesheet">
 </head>
 <body>
 
+<div class="welcome">
+
 {% if name %}
 
-<center><h1> Welcome to the Todo List App, {{name}} </h1></center>
+<h1> Welcome to Todoit Today, {{name}} </h1>
 
 {% endif %}
 
-<center><a href="/signup"><button> Sign Up</button></a></center>
+<div class="buttons">
 
-<center><a href="/login"><button> Login</button></a></center>
+    <a href="/signup"><button> Sign Up</button></a>
 
+    <a href="/login"><button> Login </button></a>
+
+</div>
+
+</div>
 
 </body>
 </html>
