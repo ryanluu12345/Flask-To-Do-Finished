@@ -41,7 +41,7 @@ def signup():
 @app.route("/entry")
 def entry():
     #TODO:(2) Return the correct template
-    return render_template("entry.html")
+    return
 
 #TODO:(4) Render the correct template for the "home" page with tasks=tasks and name=name
 #TODO:(12) Add permissions for post requests
@@ -59,7 +59,7 @@ def home():
     #TODO:(15) Check if the username and password match
     #TODO:(16) If there is a match, re-render the "home" page with the tasks and the username
 
-    return render_template("home.html")
+    return 
 
 #TODO:(17) Check post request
 #TODO:(18) Create an empty list for tasks
