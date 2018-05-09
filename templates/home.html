@@ -8,17 +8,17 @@
 </head>
 <body>
 
-<!-- Place your jinjas2 code here to render the correct name !-->
-
-
 
 <!-- Place your jinjas2 code here to render the correct name !-->
 
 <div class="page">
-<h1> Home: A collection of INSERT NAME'S tasks</h1>
 
+{% if name %}
 
-<!-- Place your jinjas2 code here to render all tasks !-->
+<h1> Home: A collection of {{name}}'s tasks</h1>
+
+{% endif %}
+
 
 <div class="nav-buttons">
 
@@ -28,10 +28,26 @@
 
 </div>
 
+<!-- Place your jinjas2 code here to render all tasks !-->
+
+
+
 <div class="tasks">
-<p>INSERT YOUR TASKS HERE</p>
+
+{% if tasks %}
+
+    {% for task in tasks %}
+
+<p>{{task}}</p>
+
+    {% endfor %}
+
+{% endif %}
+
 </div>
-    </div>
+
+
+</div>
 
 
 

@@ -1,4 +1,4 @@
-from flask import Flask, render_template,redirect, url_for, request
+from flask import request, Flask,redirect,url_for,render_template,jsonify
 import json
 
 '''Key Learning Goals
@@ -41,7 +41,7 @@ def signup():
 @app.route("/entry")
 def entry():
     #TODO:(2) Return the correct template
-    return
+    return render_template("entry.html")
 
 #TODO:(4) Render the correct template for the "home" page with tasks=tasks and name=name
 #TODO:(12) Add permissions for post requests
@@ -50,16 +50,33 @@ def home():
     #TODO:(5) Inject the below list of tasks and name into the correct template
     #Data that will be injected into the template
     tasks = ["Cleaning the dishes", "Walking the dog", "Cooking dinner", "Playing basketball", "Practicing piano"]
-    name=""
+    name="Ryan"
 
     # TODO:(22) Update the tasks with the ones from the "tasks.json" file
+    with open("tasks.json","r") as f:
+        tasks=json.load(f)
 
     #TODO:(13) Check post request
-    #TODO:(14) Get the entered username
-    #TODO:(15) Check if the username and password match
-    #TODO:(16) If there is a match, re-render the "home" page with the tasks and the username
+    if request.method=="POST":
 
-    return 
+        #TODO:(14) Get the entered username
+        username=request.form["username"]
+        password=request.form["password"]
+
+        print(username)
+        print(password)
+
+        #TODO:(15) Check if the username and password match
+        with open("user.json","r") as f:
+            data=json.load(f)
+
+        if data["username"]==username and data["password"]==password:
+
+
+            #TODO:(16) If there is a match, re-render the "home" page with the tasks and the username
+            return render_template("home.html",tasks=tasks,name=username)
+
+    return render_template("home.html",tasks=tasks,name=name)
 
 #TODO:(17) Check post request
 #TODO:(18) Create an empty list for tasks
@@ -68,18 +85,59 @@ def home():
 #TODO:(21) Write all of the tasks to the "tasks.json" file
 @app.route("/confirm-entry",methods=["POST","GET"])
 def confirm_entry():
+
+    if request.method=="POST":
+        tasks=[]
+        tasks=request.form.getlist("task")
+
+        #Writes to the tasks.json file for data storage
+        with open("tasks.json","w") as f:
+            json.dump(tasks,f)
+
     return render_template("confirm-entry.html")
 
 #TODO:(1) Make a new route whose name is "confirm-signup"
 #TODO:(3) Make the new route render the "confirm-signup" page
 #TODO:(6) Allow post and get for the confirmation page
+@app.route("/confirm-signup",methods=["POST","GET"])
+def confirm_signup():
 
     '''Inside method'''
     #TODO:(7) Check post request form data
-    #TODO:(8) Create variables from the posted data
-    #TODO:(9) Store data in the "user" dictionary
-    #TODO:(10) Store data in json file
-    #TODO:(11) Server side redirect to "login" page
+    if request.method=="POST":
+
+        #TODO:(8) Create variables from the posted data
+        data=request.form
+        print(data)
+
+        #TODO:(9) Store data in the "user" dictionary
+        user={}
+        user["username"]=data["username"]
+        user["password"]=data["password"]
+        user["email"]=data["email"]
+
+        print(user)
+
+        #TODO:(10) Store data in json file
+        #TODO:(11) Server side redirect to "login" page
+        with open("user.json","w") as f:
+            json.dump(user,f)
+
+    return render_template("confirm-signup.html")
+
+@app.route("/tasks-api",methods=["GET"])
+def tasks_api():
+
+    with open("tasks.json","r") as f:
+        data=json.load(f)
+
+    #Initializes a dictionary for the data
+    tasks={}
+    tasks["tasks"]=data
+
+    #Returns JSON format of previously initialized data
+    return jsonify(tasks)
+
 
 if __name__=="__main__":
     app.run(debug=True) #Never run as debug=True in a production environment
